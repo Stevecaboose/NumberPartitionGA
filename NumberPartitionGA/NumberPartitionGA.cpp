@@ -87,7 +87,7 @@ int greedy(list<int> L, bool displayTwoLists) {
 
 
 	
-	cout << endl << "Size of list after (lower is better (0 is a perfect solution): " << L.size() << endl;
+	cout << endl << "Size of list after (lower is better (0 is a perfect solution): " << L.size() << endl; 
 
 	if (displayTwoLists) {
 		cout << "Left list:\n";
