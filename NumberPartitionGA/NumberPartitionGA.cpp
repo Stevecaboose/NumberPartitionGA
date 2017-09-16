@@ -5,6 +5,9 @@
 #include <iostream>
 #include <list>
 #include <time.h>
+#include <string.h>
+#include <algorithm>
+
 
 using namespace std;
 
@@ -41,6 +44,9 @@ int greedy(list<int> L, bool displayTwoLists) {
 	cout << endl << "Size of list to start: " << L.size() << endl;
 	int listSize = L.size();
 
+	string leftListBinary, rightListBinary = "";
+	//int binaryPos = listSize; //May not need
+
 	L.sort(); //ascending order
 	list<int> left, right;
 	//take largest value and put it in the left list
@@ -61,15 +67,25 @@ int greedy(list<int> L, bool displayTwoLists) {
 			L.pop_back();
 			right.push_front(temp);
 			rightSum += temp;
+			rightListBinary += '1';
+			leftListBinary += '0';
 
 		}else{ //need to put it in the left list
 			temp = L.back();
 			L.pop_back();
 			left.push_front(temp);
 			leftSum += temp;
+			rightListBinary += '0';
+			leftListBinary += '1';
 		}
 
+		//reverse strings
+		reverse(rightListBinary.begin(), rightListBinary.end());
+		reverse(leftListBinary.begin(), leftListBinary.end());
+
 	} //end for
+
+
 	
 	cout << endl << "Size of list after (lower is better (0 is a perfect solution): " << L.size() << endl;
 
@@ -90,6 +106,10 @@ int greedy(list<int> L, bool displayTwoLists) {
 	cout << "\nLeft sum = " << leftSum << endl;
 	cout << "Right sum = " << rightSum << endl;
 
+	//+ leftListBinary << endl << "Right binary string: " + rightListBinary << endl;
+
+
+	cout << endl << endl << "Left binary string: ";
 	int fitness = abs(leftSum - rightSum);
 
 	return fitness;
