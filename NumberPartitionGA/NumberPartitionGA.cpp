@@ -56,6 +56,9 @@ int greedy(list<int> L, bool displayTwoLists) {
 	//store it in left
 	left.push_front(temp);
 
+	rightListBinary += '0';
+	leftListBinary += '1';
+
 	//Now we have to make it loop to push the most right ele in L to the left or right list.
 
 	int leftSum = temp;
@@ -109,7 +112,10 @@ int greedy(list<int> L, bool displayTwoLists) {
 	//+ leftListBinary << endl << "Right binary string: " + rightListBinary << endl;
 
 
-	cout << endl << endl << "Left binary string: ";
+	const char *a = leftListBinary.c_str();
+	const char *b = rightListBinary.c_str();
+
+	cout << endl << endl << "Left binary string: " << a << endl << "Right binary string: " << b << endl;
 	int fitness = abs(leftSum - rightSum);
 
 	return fitness;
