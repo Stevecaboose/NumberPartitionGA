@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include <string>
+#include <vector>
 
 class Greedy
 {
@@ -11,7 +12,7 @@ public:
 
 
 
-	void run(std::list<int>& L, bool displayTwoLists);
+	void run(std::vector<int>& L, bool displayTwoLists);
 
 	int getFitness() { return fitness; };
 

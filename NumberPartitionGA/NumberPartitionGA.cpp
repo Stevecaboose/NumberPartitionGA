@@ -8,6 +8,8 @@
 #include <string>
 #include <algorithm>
 #include "Greedy.h"
+#include "GA.h"
+#include <vector>
 
 
 using namespace std;
@@ -21,7 +23,7 @@ int main()
 	*	Test instance
 	**/
 
-	list<int> testList = { 4, 5, 6, 7, 8 };
+	vector<int> testList = {8, 5, 2, 3, 5 };
 
 	/**
 	*
@@ -29,7 +31,7 @@ int main()
 	**/
 	srand(static_cast<unsigned int>(time(NULL)));
 
-	list<int> testRandomList;
+	vector <int> testRandomList;
 	for (int i = 0; i < 300000; i++) {
 		testRandomList.push_back(rand() % 10000);
 	}
@@ -38,6 +40,9 @@ int main()
 	greedy.run(testList, true);
 
 	cout << "\nFitness of greedy algorithm (lower is better) = " << greedy.getFitness() << endl;
+
+	//GA ga;
+	//ga.run();
 	
     return 0;
 }

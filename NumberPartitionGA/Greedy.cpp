@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <functional>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -20,21 +22,31 @@ Greedy::~Greedy()
 }
 
 
-void Greedy::run(std::list<int>& L, bool displayTwoLists) {
+void Greedy::run(std::vector<int>& L, bool displayTwoLists) {
 
 	listSize = L.size();
 	cout << endl << "Size of list to start: " << listSize << endl;
 	
+	cout << "\n\nOrigonal List:\n\n";
+	for (auto i = L.begin(); i != L.end(); ++i)
+		std::cout << *i << ' ';
 
-	L.sort();
+	std::sort(L.begin(), L.end());
 
-	list<int> left, right;
+	cout << "\n\nSorted List:\n\n";
+
+	for (auto i = L.begin(); i != L.end(); ++i)
+		std::cout << *i << ' ';
+	
+	cout << endl << endl << endl;
+
+	vector<int> left, right;
 	//take largest value and put it in the left list
 	int temp = L.back(); //grab last value
 	L.pop_back(); //remove last value
 
 				  
-	left.push_front(temp);//store it in left
+	left.push_back(temp);//store it in left at the end (easier to do for vectors)
 
 	binarySolution += '1';
 
@@ -45,9 +57,9 @@ void Greedy::run(std::list<int>& L, bool displayTwoLists) {
 
 	for (int i = 0; i < listSize - 1; i++) {
 		if (leftSum > rightSum) { //need to put it in the right list
-			temp = L.back();
-			L.pop_back();
-			right.push_front(temp);
+			temp = L.back(); //grab last value
+			L.pop_back(); //remove last value
+			right.push_back(temp); //store it in right last position (right side)
 			rightSum += temp;
 
 			binarySolution += '0';
@@ -55,9 +67,9 @@ void Greedy::run(std::list<int>& L, bool displayTwoLists) {
 
 		}
 		else { //need to put it in the left list
-			temp = L.back();
-			L.pop_back();
-			left.push_front(temp);
+			temp = L.back(); //grab last value
+			L.pop_back(); //remove last value
+			left.push_back(temp); // store it in the last position (left side) 
 			leftSum += temp;
 
 			binarySolution += '1';
