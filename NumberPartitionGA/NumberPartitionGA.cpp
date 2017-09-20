@@ -10,7 +10,10 @@
 #include "Greedy.h"
 #include "GA.h"
 #include <vector>
+#include<conio.h>
 
+
+void  check();
 
 using namespace std;
 
@@ -23,7 +26,7 @@ int main()
 	*	Test instance
 	**/
 
-	vector<int> testList = {8, 5, 2, 3, 5 };
+	vector<int> testList = {4, 5, 6, 7, 8};
 
 	/**
 	*
@@ -42,7 +45,21 @@ int main()
 	//cout << "\nFitness of greedy algorithm (lower is better) = " << greedy.getFitness() << endl;
 
 	GA ga(testList);
-	ga.run();
+	ga.run(50);
 	
+
+	check();
+
     return 0;
+}
+
+void  check()
+{
+	char chk; int j;
+	cout << "\n\nPress any key to continue...";
+	chk = _getch();
+	j = chk;
+	for (int i = 1; i <= 256; i++)
+		if (i == j) break;
+	
 }
