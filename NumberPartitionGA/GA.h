@@ -12,6 +12,16 @@ public:
 	void displayPopulation(const std::vector<std::vector<std::string>> vector_const);
 	int getFitness(std::vector<std::string> chromosome);
 	std::vector<int> getSortedList();
+	void setBestSolution(std::vector<std::vector<std::string>>& L);
+
+
+	struct finalSolutionStruct
+	{
+		int fitness;
+		std::vector<std::string> binarySolution;
+		std::vector<int> leftPartition;
+		std::vector<int> rightPartition;
+	} finalSolution;
 
 private:
 	std::vector<std::string> testVector;
@@ -26,15 +36,9 @@ private:
 	int secondParentFitness;
 	int firstCross; 
 	int secondCross;
-	int bestSolutionIndex = 0;
+	int bestSolutionIndex;
 	
-	struct finalSolutionStruct
-	{
-		int fitness;
-		std::string binarySolution;
-		std::vector<int> leftPartition;
-		std::vector<int> rightPartiton;
-	} finalSolution;
+
 
 };
 

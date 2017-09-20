@@ -35,8 +35,8 @@ int main()
 	srand(static_cast<unsigned int>(time(NULL)));
 
 	vector <int> testRandomList;
-	for (int i = 0; i < 300000; i++) {
-		testRandomList.push_back(rand() % 10000);
+	for (int i = 0; i < 10; i++) {
+		testRandomList.push_back(rand() % 10);
 	}
 
 	//Greedy greedy;
@@ -44,9 +44,38 @@ int main()
 
 	//cout << "\nFitness of greedy algorithm (lower is better) = " << greedy.getFitness() << endl;
 
-	GA ga(testList);
+
+
+	/////////////////////////////////////////
+	//DISPLAY RESULTS OF GA/////////////////
+
+
+	GA ga(testRandomList);
 	ga.run(50);
 	
+	std::cout << "Optimal solution results: \n\n";
+	std::cout << "Fitness: " << ga.finalSolution.fitness << std::endl;
+	std::cout << "Binary Solution: ";
+
+	for (int i = 0; i < ga.finalSolution.binarySolution.size(); i++) {
+		std::cout << ga.finalSolution.binarySolution[i] << " ";
+	}
+
+	std::cout << "\nLeft Partition: {";
+	for (int i = 0; i < ga.finalSolution.leftPartition.size(); i++) {
+		std::cout << ga.finalSolution.leftPartition[i] << " ";
+	}
+
+	std::cout << " }\n";
+
+	std::cout << "\nRight Partition: {";
+	for (int i = 0; i < ga.finalSolution.rightPartition.size(); i++) {
+		std::cout << ga.finalSolution.rightPartition[i] << " ";
+	}
+
+	std::cout << " }\n";
+
+	//////////////////////////////////////////////////////////////
 
 	check();
 

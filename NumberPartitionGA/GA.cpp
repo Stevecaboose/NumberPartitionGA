@@ -155,9 +155,7 @@ void GA::run(int itterations) {
 
 	//after our itterations is complete, we need to find the best fitness, the coorisponding binary solution and numeric solution
 
-	//for (int i = 0; i < popSize; i++) {
-
-	//}
+	setBestSolution(populationVector);
 }
 
 
@@ -255,4 +253,41 @@ std::vector<int> GA::getSortedList() {
 	cout << endl << endl << endl;
 
 	return sortedList;
+}
+
+void GA::setBestSolution(std::vector<std::vector<std::string>>& L){
+
+	//put all fitness's in an array
+
+	int* valuesArray = new int[popSize];
+
+	//populate array with fitnesses
+	for (int i = 0; i < popSize; i++) {
+		valuesArray[i] = getFitness(L[i]);
+	}
+
+	int smallestFitness = valuesArray[0];
+	int smallestFitnessIndex = 0;
+
+	for (int i = 1; i < sizeof(valuesArray)/sizeof(valuesArray[0]); ++i) {
+		if (valuesArray[i] < smallestFitness) {
+			smallestFitness = valuesArray[i];
+			smallestFitnessIndex = i;
+		}
+	}
+
+	finalSolution.fitness = smallestFitness;
+	finalSolution.binarySolution = L[smallestFitnessIndex];
+
+
+
+	for (int i = 0; i < solution_size; i++) {
+		
+		if (L[smallestFitnessIndex][i] == "1") { //element belongs in left partition
+			finalSolution.leftPartition.push_back(sortedList[i]);
+		}
+		else {
+			finalSolution.rightPartition.push_back(sortedList[i]);
+		}
+	}
 }
