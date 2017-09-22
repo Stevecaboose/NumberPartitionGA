@@ -11,25 +11,45 @@
 
 using namespace std;
 
+/**
+*	@brief Default constructor for genetic algorithm. This should not be used by default
+*/
 GA::GA()
 {
 	srand(static_cast<unsigned int>(time(NULL)));
 	popSize = 0;
 }
 
-GA::GA(std::vector<int> startingList) {
+
+/**
+*	@brief Constructor for genetic algorithm.
+*
+*	@param startingList A vector which contains the origonal number set
+*	@param popsize <INT> How many chromosomes are generated and kept in the population
+*/
+GA::GA(std::vector<int> startingList, int popsize) {
 
 	srand(static_cast<unsigned int>(time(NULL)));
 	popSize = 0;
 	std::sort(startingList.begin(), startingList.end());
 	sortedList = startingList;
 	solution_size = startingList.size();
+	INIT_POP_SIZE = popsize;
 }
 
+/**
+*	@brief Default deconstructor for GA class
+*/
 GA::~GA()
 {
 }
 
+/**
+*	@brief run executes the genetic algorithm.
+*
+*	@param itterations <INT> How many time the algorithm will loop (number of generations)
+*	@return void
+*/
 void GA::run(int itterations) {
 
 	// make a test vector
@@ -158,7 +178,14 @@ void GA::run(int itterations) {
 	setBestSolution(populationVector);
 }
 
-
+/**
+*	@brief tournament picks two randomly selected parents from the population. The fitness of each chromosome is compared. The one with the lowest fitness (better fitness)
+*	is the chosen and placed back into the population. The loser chromosome is then discarded from the popultion.
+*
+*	@param L a vector containing the current chromosome population
+*	@param popSize current population size
+*	@retrurn vector<string> Returns the winner chromosome from the tournament selection
+*/
 std::vector<std::string> GA::tournament(std::vector<std::vector<std::string>>& L, int& popSize){
 
 	std::cout << "Randomly selecting first contender...\n\n";
@@ -209,6 +236,12 @@ std::vector<std::string> GA::tournament(std::vector<std::vector<std::string>>& L
 	}
 }
 
+/**
+*	@brief Displays to the console each chromosome and their binary representation. This can be called at any time to view this information.
+*
+*	@param vector_const The vector containing the population of chromosomes. This is constant because we are only viewing data.
+*	@return void
+*/
 void GA::displayPopulation(const std::vector<std::vector<std::string>> vector_const) {
 
 	for (int i = 0; i < vector_const.size(); i++) {
@@ -255,11 +288,18 @@ std::vector<int> GA::getSortedList() {
 	return sortedList;
 }
 
+/**
+*	@brief Compares all of the chromosomes in the current population and picks the first best solution from the population. This is then stored into a data structure called finalSolution.
+*	
+*	@param L a vector containing the current population of chromosomes
+*	
+*	@return void
+*/
 void GA::setBestSolution(std::vector<std::vector<std::string>>& L){
 
 	//put all fitness's in an array
 
-	int* valuesArray = new int[popSize];
+	std::vector<int> valuesArray(popSize);
 
 	//populate array with fitnesses
 	for (int i = 0; i < popSize; i++) {

@@ -1,0 +1,184 @@
+\hypertarget{class_g_a}{}\section{GA Class Reference}
+\label{class_g_a}\index{GA@{GA}}
+
+
+{\ttfamily \#include $<$G\+A.\+h$>$}
+
+
+
+Collaboration diagram for GA\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_g_a_1_1final_solution_struct}{final\+Solution\+Struct}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_g_a_a754149f21a0440f8078abb48f1c88ef3}{GA} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for genetic algorithm. This should not be used by default. \end{DoxyCompactList}\item 
+\hyperlink{class_g_a_a523a5fa03652f94984ba5454632ec385}{GA} (std\+::vector$<$ int $>$ starting\+List, int I\+N\+I\+T\+\_\+\+P\+O\+P\+\_\+\+S\+I\+ZE)
+\begin{DoxyCompactList}\small\item\em Constructor for genetic algorithm. \end{DoxyCompactList}\item 
+\hyperlink{class_g_a_a18975e5b8b24b68b2d783ae3080845c9}{$\sim$\+GA} ()
+\begin{DoxyCompactList}\small\item\em Default deconstructor for \hyperlink{class_g_a}{GA} class. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_a_a4828dadbded41199cb54fc71daf4bd44}{run} (int itterations)
+\begin{DoxyCompactList}\small\item\em run executes the genetic algorithm. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \hyperlink{class_g_a_a6bd43faf13978fc5ea9ed305523288d6}{tournament} (std\+::vector$<$ std\+::vector$<$ std\+::string $>$$>$ \&L, int \&pop\+Size)
+\begin{DoxyCompactList}\small\item\em tournament picks two randomly selected parents from the population. The fitness of each chromosome is compared. The one with the lowest fitness (better fitness) is the chosen and placed back into the population. The loser chromosome is then discarded from the popultion. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_a_a3dd11c58a07b6d73b7eeaed2821ac762}{display\+Population} (const std\+::vector$<$ std\+::vector$<$ std\+::string $>$$>$ vector\+\_\+const)
+\begin{DoxyCompactList}\small\item\em Displays to the console each chromosome and their binary representation. This can be called at any time to view this information. \end{DoxyCompactList}\item 
+int \hyperlink{class_g_a_a1410614c7bc1e10f428039e95b5056bc}{get\+Fitness} (std\+::vector$<$ std\+::string $>$ chromosome)
+\item 
+std\+::vector$<$ int $>$ \hyperlink{class_g_a_aae44c594b59257c78ea06d1811cfef98}{get\+Sorted\+List} ()
+\item 
+void \hyperlink{class_g_a_a7456fb3da49960949c9e4fce3939182a}{set\+Best\+Solution} (std\+::vector$<$ std\+::vector$<$ std\+::string $>$$>$ \&L)
+\begin{DoxyCompactList}\small\item\em Compares all of the chromosomes in the current population and picks the first best solution from the population. This is then stored into a data structure called final\+Solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_g_a_1_1final_solution_struct}{G\+A\+::final\+Solution\+Struct} \hyperlink{class_g_a_a301e86430cdc9d3af98d85267fb0f963}{final\+Solution}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_g_a_a754149f21a0440f8078abb48f1c88ef3}{}\label{class_g_a_a754149f21a0440f8078abb48f1c88ef3} 
+\index{GA@{GA}!GA@{GA}}
+\index{GA@{GA}!GA@{GA}}
+\subsubsection{\texorpdfstring{G\+A()}{GA()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily G\+A\+::\+GA (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor for genetic algorithm. This should not be used by default. 
+
+\hypertarget{class_g_a_a523a5fa03652f94984ba5454632ec385}{}\label{class_g_a_a523a5fa03652f94984ba5454632ec385} 
+\index{GA@{GA}!GA@{GA}}
+\index{GA@{GA}!GA@{GA}}
+\subsubsection{\texorpdfstring{G\+A()}{GA()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily G\+A\+::\+GA (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int $>$}]{starting\+List,  }\item[{int}]{popsize }\end{DoxyParamCaption})}
+
+
+
+Constructor for genetic algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em starting\+List} & A vector which contains the origonal number set \\
+\hline
+{\em popsize} & $<$\+I\+N\+T$>$ How many chromosomes are generated and kept in the population \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_g_a_a18975e5b8b24b68b2d783ae3080845c9}{}\label{class_g_a_a18975e5b8b24b68b2d783ae3080845c9} 
+\index{GA@{GA}!````~GA@{$\sim$\+GA}}
+\index{````~GA@{$\sim$\+GA}!GA@{GA}}
+\subsubsection{\texorpdfstring{$\sim$\+G\+A()}{~GA()}}
+{\footnotesize\ttfamily G\+A\+::$\sim$\+GA (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default deconstructor for \hyperlink{class_g_a}{GA} class. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_g_a_a3dd11c58a07b6d73b7eeaed2821ac762}{}\label{class_g_a_a3dd11c58a07b6d73b7eeaed2821ac762} 
+\index{GA@{GA}!display\+Population@{display\+Population}}
+\index{display\+Population@{display\+Population}!GA@{GA}}
+\subsubsection{\texorpdfstring{display\+Population()}{displayPopulation()}}
+{\footnotesize\ttfamily void G\+A\+::display\+Population (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ std\+::string $>$$>$}]{vector\+\_\+const }\end{DoxyParamCaption})}
+
+
+
+Displays to the console each chromosome and their binary representation. This can be called at any time to view this information. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+const} & The vector containing the population of chromosomes. This is constant because we are only viewing data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{class_g_a_a1410614c7bc1e10f428039e95b5056bc}{}\label{class_g_a_a1410614c7bc1e10f428039e95b5056bc} 
+\index{GA@{GA}!get\+Fitness@{get\+Fitness}}
+\index{get\+Fitness@{get\+Fitness}!GA@{GA}}
+\subsubsection{\texorpdfstring{get\+Fitness()}{getFitness()}}
+{\footnotesize\ttfamily int G\+A\+::get\+Fitness (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$}]{chromosome }\end{DoxyParamCaption})}
+
+\hypertarget{class_g_a_aae44c594b59257c78ea06d1811cfef98}{}\label{class_g_a_aae44c594b59257c78ea06d1811cfef98} 
+\index{GA@{GA}!get\+Sorted\+List@{get\+Sorted\+List}}
+\index{get\+Sorted\+List@{get\+Sorted\+List}!GA@{GA}}
+\subsubsection{\texorpdfstring{get\+Sorted\+List()}{getSortedList()}}
+{\footnotesize\ttfamily std\+::vector$<$ int $>$ G\+A\+::get\+Sorted\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\hypertarget{class_g_a_a4828dadbded41199cb54fc71daf4bd44}{}\label{class_g_a_a4828dadbded41199cb54fc71daf4bd44} 
+\index{GA@{GA}!run@{run}}
+\index{run@{run}!GA@{GA}}
+\subsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void G\+A\+::run (\begin{DoxyParamCaption}\item[{int}]{itterations }\end{DoxyParamCaption})}
+
+
+
+run executes the genetic algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em itterations} & $<$\+I\+N\+T$>$ How many time the algorithm will loop (number of generations) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:
+% FIG 1
+\hypertarget{class_g_a_a7456fb3da49960949c9e4fce3939182a}{}\label{class_g_a_a7456fb3da49960949c9e4fce3939182a} 
+\index{GA@{GA}!set\+Best\+Solution@{set\+Best\+Solution}}
+\index{set\+Best\+Solution@{set\+Best\+Solution}!GA@{GA}}
+\subsubsection{\texorpdfstring{set\+Best\+Solution()}{setBestSolution()}}
+{\footnotesize\ttfamily void G\+A\+::set\+Best\+Solution (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::vector$<$ std\+::string $>$$>$ \&}]{L }\end{DoxyParamCaption})}
+
+
+
+Compares all of the chromosomes in the current population and picks the first best solution from the population. This is then stored into a data structure called final\+Solution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em L} & a vector containing the current population of chromosomes\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{class_g_a_a6bd43faf13978fc5ea9ed305523288d6}{}\label{class_g_a_a6bd43faf13978fc5ea9ed305523288d6} 
+\index{GA@{GA}!tournament@{tournament}}
+\index{tournament@{tournament}!GA@{GA}}
+\subsubsection{\texorpdfstring{tournament()}{tournament()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ G\+A\+::tournament (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::vector$<$ std\+::string $>$$>$ \&}]{L,  }\item[{int \&}]{pop\+Size }\end{DoxyParamCaption})}
+
+
+
+tournament picks two randomly selected parents from the population. The fitness of each chromosome is compared. The one with the lowest fitness (better fitness) is the chosen and placed back into the population. The loser chromosome is then discarded from the popultion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em L} & a vector containing the current chromosome population \\
+\hline
+{\em pop\+Size} & current population size  vector$<$string$>$ Returns the winner chromosome from the tournament selection \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_g_a_a301e86430cdc9d3af98d85267fb0f963}{}\label{class_g_a_a301e86430cdc9d3af98d85267fb0f963} 
+\index{GA@{GA}!final\+Solution@{final\+Solution}}
+\index{final\+Solution@{final\+Solution}!GA@{GA}}
+\subsubsection{\texorpdfstring{final\+Solution}{finalSolution}}
+{\footnotesize\ttfamily struct \hyperlink{struct_g_a_1_1final_solution_struct}{G\+A\+::final\+Solution\+Struct}  G\+A\+::final\+Solution}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+F\+:/\+Google Drive/\+C\+S\+C\+I443/\+Project 2/\+Number\+Partition\+G\+A/\+Number\+Partition\+G\+A/\hyperlink{_g_a_8h}{G\+A.\+h}\item 
+F\+:/\+Google Drive/\+C\+S\+C\+I443/\+Project 2/\+Number\+Partition\+G\+A/\+Number\+Partition\+G\+A/\hyperlink{_g_a_8cpp}{G\+A.\+cpp}\end{DoxyCompactItemize}

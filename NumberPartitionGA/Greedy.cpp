@@ -9,25 +9,35 @@
 
 using namespace std;
 
-
+/**
+*	@breif Default constructor for Greedy.
+*/
 Greedy::Greedy()
 {
 	binarySolution = "";
 	fitness = -1;
 }
 
-
+/**
+*	@brief Default deconstructor for Greedy
+*/
 Greedy::~Greedy()
 {
 }
 
-
+/**
+*	@brief Starts the main algorithm for the greedy algorithm
+*	
+*	@param L is a vector containing the origonal number set
+*	@param displayTwoLists <bool> Displays extra information about the final results
+*	@return void
+*/
 void Greedy::run(std::vector<int>& L, bool displayTwoLists) {
 
 	listSize = L.size();
 	cout << endl << "Size of list to start: " << listSize << endl;
 	
-	cout << "\n\nOrigonal List:\n\n";
+	cout << "\n\nOriginal List:\n\n";
 	for (auto i = L.begin(); i != L.end(); ++i)
 		std::cout << *i << ' ';
 
@@ -63,7 +73,7 @@ void Greedy::run(std::vector<int>& L, bool displayTwoLists) {
 			rightSum += temp;
 
 			binarySolution += '0';
-			cout << "\nPercent done: " << (i*1.0 / listSize) * 100;
+			cout << "\nPercent done: " << (i*1.0 / listSize) * 100 << "%";
 
 		}
 		else { //need to put it in the left list
@@ -73,14 +83,14 @@ void Greedy::run(std::vector<int>& L, bool displayTwoLists) {
 			leftSum += temp;
 
 			binarySolution += '1';
-			cout << "\nPercent done: " << (i*1.0 / listSize) * 100;
+			cout << "\nPercent done: " << (i*1.0 / listSize) * 100 << "%";
 		}
 
 	} //end for
 
 	std::reverse(std::begin(binarySolution), std::end(binarySolution));
 
-	cout << endl << "Size of list after (lower is better (0 is a perfect solution): " << L.size() << endl;
+	cout << endl << "Size of list after (expected 0): " << L.size() << endl;
 
 	if (displayTwoLists) {
 		cout << "Left list:\n";

@@ -4,7 +4,7 @@ class GA
 {
 public:
 	GA();
-	GA(std::vector<int> startingList);
+	GA(std::vector<int> startingList, int INIT_POP_SIZE);
 	~GA();
 
 	void run(int itterations); //no input data. Data is randomly generated
@@ -25,7 +25,7 @@ public:
 
 private:
 	std::vector<std::string> testVector;
-	const int INIT_POP_SIZE = 10; //starting number of potential parents in the population (population size)
+	int INIT_POP_SIZE; //starting number of potential parents in the population (population size)
 	int solution_size; //size of a chromosome which must equal the size of the instance
 	int popSize;
 	std::vector<int> sortedList;

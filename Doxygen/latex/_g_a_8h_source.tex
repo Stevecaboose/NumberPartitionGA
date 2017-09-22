@@ -1,0 +1,49 @@
+\hypertarget{_g_a_8h_source}{}\section{G\+A.\+h}
+\label{_g_a_8h_source}\index{F\+:/\+Google Drive/\+C\+S\+C\+I443/\+Project 2/\+Number\+Partition\+G\+A/\+Number\+Partition\+G\+A/\+G\+A.\+h@{F\+:/\+Google Drive/\+C\+S\+C\+I443/\+Project 2/\+Number\+Partition\+G\+A/\+Number\+Partition\+G\+A/\+G\+A.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#pragma once}
+00002 \textcolor{preprocessor}{#include <vector>}
+\hypertarget{_g_a_8h_source_l00003}{}\hyperlink{class_g_a}{00003} \textcolor{keyword}{class }\hyperlink{class_g_a}{GA}
+00004 \{
+00005 \textcolor{keyword}{public}:
+00006     \hyperlink{class_g_a_a754149f21a0440f8078abb48f1c88ef3}{GA}();
+00007     \hyperlink{class_g_a_a754149f21a0440f8078abb48f1c88ef3}{GA}(std::vector<int> startingList, \textcolor{keywordtype}{int} INIT\_POP\_SIZE);
+00008     \hyperlink{class_g_a_a18975e5b8b24b68b2d783ae3080845c9}{~GA}();
+00009 
+00010     \textcolor{keywordtype}{void} \hyperlink{class_g_a_a4828dadbded41199cb54fc71daf4bd44}{run}(\textcolor{keywordtype}{int} itterations); \textcolor{comment}{//no input data. Data is randomly generated}
+00011     std::vector<std::string> \hyperlink{class_g_a_a6bd43faf13978fc5ea9ed305523288d6}{tournament}(std::vector<std::vector<std::string>>& L, \textcolor{keywordtype}{int}& popSize);
+00012     \textcolor{keywordtype}{void} \hyperlink{class_g_a_a3dd11c58a07b6d73b7eeaed2821ac762}{displayPopulation}(\textcolor{keyword}{const} std::vector<std::vector<std::string>> vector\_const);
+00013     \textcolor{keywordtype}{int} \hyperlink{class_g_a_a1410614c7bc1e10f428039e95b5056bc}{getFitness}(std::vector<std::string> chromosome);
+00014     std::vector<int> \hyperlink{class_g_a_aae44c594b59257c78ea06d1811cfef98}{getSortedList}();
+00015     \textcolor{keywordtype}{void} \hyperlink{class_g_a_a7456fb3da49960949c9e4fce3939182a}{setBestSolution}(std::vector<std::vector<std::string>>& L);
+00016 
+00017 
+\hypertarget{_g_a_8h_source_l00018}{}\hyperlink{struct_g_a_1_1final_solution_struct}{00018}     \textcolor{keyword}{struct }\hyperlink{struct_g_a_1_1final_solution_struct}{finalSolutionStruct}
+00019     \{
+\hypertarget{_g_a_8h_source_l00020}{}\hyperlink{struct_g_a_1_1final_solution_struct_a3e55cdb1b7562714b90b82ca66ad983a}{00020}         \textcolor{keywordtype}{int} \hyperlink{struct_g_a_1_1final_solution_struct_a3e55cdb1b7562714b90b82ca66ad983a}{fitness};
+\hypertarget{_g_a_8h_source_l00021}{}\hyperlink{struct_g_a_1_1final_solution_struct_a1af467f3eb53235e34bafbec5d7866e2}{00021}         std::vector<std::string> \hyperlink{struct_g_a_1_1final_solution_struct_a1af467f3eb53235e34bafbec5d7866e2}{binarySolution};
+\hypertarget{_g_a_8h_source_l00022}{}\hyperlink{struct_g_a_1_1final_solution_struct_aedc052fa2f16ac65ef65b23692177ab9}{00022}         std::vector<int> \hyperlink{struct_g_a_1_1final_solution_struct_aedc052fa2f16ac65ef65b23692177ab9}{leftPartition};
+\hypertarget{_g_a_8h_source_l00023}{}\hyperlink{struct_g_a_1_1final_solution_struct_a61ec4bab473d91916ca5fee656fb9a15}{00023}         std::vector<int> \hyperlink{struct_g_a_1_1final_solution_struct_a61ec4bab473d91916ca5fee656fb9a15}{rightPartition};
+00024     \} \hyperlink{class_g_a_a301e86430cdc9d3af98d85267fb0f963}{finalSolution};
+00025 
+00026 \textcolor{keyword}{private}:
+00027     std::vector<std::string> testVector;
+00028     \textcolor{keywordtype}{int} INIT\_POP\_SIZE; \textcolor{comment}{//starting number of potential parents in the population (population size)}
+00029     \textcolor{keywordtype}{int} solution\_size; \textcolor{comment}{//size of a chromosome which must equal the size of the instance}
+00030     \textcolor{keywordtype}{int} popSize;
+00031     std::vector<int> sortedList;
+00032     std::vector<std::string> firstParent;
+00033     std::vector<std::string> secondParent;
+00034     std::vector<std::string> offspring;
+00035     \textcolor{keywordtype}{int} firstParentFitness;
+00036     \textcolor{keywordtype}{int} secondParentFitness;
+00037     \textcolor{keywordtype}{int} firstCross; 
+00038     \textcolor{keywordtype}{int} secondCross;
+00039     \textcolor{keywordtype}{int} bestSolutionIndex;
+00040     
+00041 
+00042 
+00043 \};
+00044 
+\end{DoxyCode}
