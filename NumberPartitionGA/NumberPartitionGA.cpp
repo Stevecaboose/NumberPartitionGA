@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
 
 			////////////////////////////////////////
 
-			std::string argv2 = argv[2];
+			std::string argv2 = argv[2]; 
 			if (argv2 == "-rand"){
 				useRandomList = true;
 			}
