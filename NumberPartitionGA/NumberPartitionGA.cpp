@@ -1,7 +1,7 @@
 /**
 *	@file NumberPartitionGA.cpp
 *	@author Steven Scholz
-*	@date 9/21/17
+*	@date 4/23/18
 *	@version 1.0
 *
 *	@brief Use a greedy algorithm and genetic algorithm to solve the number partition problem
@@ -33,7 +33,7 @@
 *	* Use 2-point crossover to splice the chromosomes from the two parents to create an offspring chromosome
 *
 *	* Simulate genetic mutation by making the probability of each bit in an offspring chromosome be the opposite of what it was. This probability
-*	is much higher in this algorithm than actaul biology. This is to help speed up the process. 10% probabilty is a good area to work with.
+*	is much higher in this algorithm than actaul biology. This is to help speed up the process. 5% probabilty is a good area to work with.
 *
 *	After the finite number of generations are completed, the algorithm might have found multiple solutions. All of the best solutions are then
 *	shown with their respective fitness (abs(sumLeft - sumRight)), binary chromosome, and numeric partitions.
@@ -41,20 +41,24 @@
 *   You can use the argument -h to call the help menu for the different command line arguments
 */
 
-#include "stdafx.h"
+
 #include <iostream>
 #include <list>
-#include <time.h>
+#include <ctime>
 #include <string>
 #include <algorithm>
 #include "Greedy.h"
 #include "GA.h"
 #include <vector>
 #include <conio.h>
+#include "InputData.h"
+#include <fstream>
+
+const std::string INPUTFILE = "InputData.csv";
 
 
 void check();
-void helpMenu();
+
 
 using namespace std;
 
@@ -65,196 +69,38 @@ int main(int argc, char *argv[])
 
 
 	vector<int> testList = {4, 5, 6, 7, 8};
+	vector<int> dataList;
 
 
 	bool useRandomList = false;
-	bool useGAAlgorithm = false;
-	bool useGreedyAlgorithm = false;
+	bool useGAAlgorithm = true;
+	bool useGreedyAlgorithm = true;
 	int popsize;
 	int itterations;
 	int randomListSize;
 	bool showHelp = true;
 	int randomListStart = 0;
-	int randomListEnd = 10;
+	int randomListEnd = 10;		
+	
+	//load in file
+	//make file loader
 
+	InputData data(INPUTFILE);
 
-	if (argc == 6) {
-		randomListStart = atoi(argv[4]);
-		randomListEnd = atoi(argv[5]);
-	}
-	else if (argc == 8) {
-		randomListStart = atoi(argv[6]);
-		randomListEnd = atoi(argv[7]);
-	}
-	else if (argc == 9) {
-		randomListStart = atoi(argv[7]);
-		randomListEnd = atoi(argv[8]);
-	}
+	dataList = data.getdataSet();
 
-	std::string showHelpString = argv[1];
-	std::string help = "-h";
-
-	if ((showHelpString.compare(help)) == 0) {
-		showHelp = true;
-	}
-
-	//if only doing greedy algorithm (arguments = 4)
-	if (argc == 6 || argc == 8) {
-
-		
-
-			std::string argv1 = argv[1];
-			if (argv1 == "-greedy") {
-				useGreedyAlgorithm = true;
-			}
-			
-			// Nested if if we are doing ga algorithm
-			////////////////////////////////////////////////
-			if (argv1 == "-ga") {
-				useGAAlgorithm = true;
-
-				std::string argv2 = argv[2];
-				if (argv2 == "-rand") {
-					useRandomList = true;
-				}
-
-				randomListSize = stoi(argv[3]);
-				if (randomListSize <= 0) {
-					std::cout << "Invalid argument for randomListSize. Value must not be negative.\n";
-					std::cout << "Use -h for help menu\n";
-					check();
-					return 0;
-				}
-
-				popsize = stoi(argv[4]);
-
-				if (popsize <= 0) {
-					std::cout << "Invalid argument for popsize. Value must not be negative.\n";
-					std::cout << "Use -h for help menu\n";
-					check();
-					return 0;
-				}
-
-				itterations = stoi(argv[5]);
-				if (itterations <= 0) {
-					std::cout << "Invalid argument for itterations. Value must not be negative.\n";
-					std::cout << "Use -h for help menu\n";
-					check();
-					return 0;
-				}
-			}
-
-			////////////////////////////////////////
-
-			std::string argv2 = argv[2]; 
-			if (argv2 == "-rand"){
-				useRandomList = true;
-			}
-		
-			randomListSize = stoi(argv[3]);
-			if (randomListSize <= 0) {
-				std::cout << "Invalid argument for randomListSize. Value must not be negative.\n";
-				std::cout << "Use -h for help menu\n";
-				check();
-				return 0;
-			}
-
-			//popsize = stoi(argv[4]);
-
-			//if (popsize <= 0) {
-			//	cout << "Invalid argument for popsize. Value must not be negative.\n";
-			//	cout << "Use -h for help menu\n";
-			//	check();
-			//	return 0;
-			//}
-
-			//itterations = stoi(argv[5]);
-			//if (itterations <= 0) {
-			//	cout << "Invalid argument for itterations. Value must not be negative.\n";
-			//	cout << "Use -h for help menu\n";
-			//	check();
-			//	return 0;
-			//}
-
-			showHelp = false;
-
-	}else if (argc == 9) { //USING BOTH ALGORITHMS 
-
-		std::string argv1 = argv[1];
-		std::string argv2 = argv[2];
-		if (argv1 == "-ga" || argv2 == "-ga") {
-			useGAAlgorithm = true;
-		}
-
-		argv1 = argv[1];
-		argv2 = argv[2];
-		if (argv1 == "-greedy" || argv2 == "-greedy") {
-			useGreedyAlgorithm = true;
-		}
-
-		std::string argv3 = argv[3];
-		if (argv3 == "-rand") {
-			useRandomList = true;
-		}
-
-		randomListSize = stoi(argv[4]);
-		if (randomListSize <= 0) {
-			std::cout << "Invalid argument for randomListSize. Value must not be negative.\n";
-			std::cout << "Use -h for help menu\n";
-			check();
-			return 0;
-		}
-
-		popsize = stoi(argv[5]);
-
-		if (popsize <= 0) {
-			std::cout << "Invalid argument for popsize. Value must not be negative.\n";
-			std::cout << "Use -h for help menu\n";
-			check();
-			return 0;
-		}
-
-		itterations = stoi(argv[6]);
-		if (itterations <= 0) {
-			std::cout << "Invalid argument for itterations. Value must not be negative.\n";
-			std::cout << "Use -h for help menu\n";
-			check();
-			return 0;
-		}
-
-		showHelp = false;
-		
-	}
-	else {
-		std::cout << "\n\nEither help menu called or invalid arguments...\n\n";
-		helpMenu();
-		check();
-		return 0;
-
-	}
-
-
-
-	vector <int> testRandomList;
-
-	if (useRandomList) {
-		std::cout << "\nUsing random list with a size of: " << randomListSize << endl;
-		for (int i = 0; i < randomListSize; i++) {
-			testRandomList.push_back(rand() % (randomListEnd - randomListStart + 1) + randomListStart);
-		}
-	}
-	else { //if theres a problem or you want to use a random first argument. This will be
-		   // generated
-		std::cout << "Random command not recognized...making a random list using numbers from 0 to 10..." << endl;
-		for (int i = 0; i < 10; i++) {
-			testRandomList.push_back(rand() % 10);
-		}
-
-	}
 
 	if (useGAAlgorithm) {
+
+		
+		
+
+		cout << "How many itterations would you like to use?";
+		cin >> itterations;
+
+		popsize = dataList.size();
 		std::cout << "Using genetic algorithm with a population of: " << popsize << " and the number of generations: " << itterations << endl;
-		GA ga(testRandomList, popsize);
+		GA ga(dataList, popsize);
 		ga.run(itterations);
 
 
@@ -267,10 +113,10 @@ int main(int argc, char *argv[])
 		std::cout << "Optimal solution results: \n\n";
 		std::cout << "Original SORTED list: \n{";
 
-		std::sort(testRandomList.begin(), testRandomList.end());
+		std::sort(dataList.begin(), dataList.end());
 
-		for (int i = 0; i < testRandomList.size(); i++) {
-			std::cout << " " << testRandomList[i];
+		for (int i = 0; i < dataList.size(); i++) {
+			std::cout << " " << dataList[i];
 		}
 
 
@@ -301,10 +147,12 @@ int main(int argc, char *argv[])
 
 	} // END GA RUN
 
+	
+
 	if (useGreedyAlgorithm) {
 		std::cout << "Using greedy algorithm..." << endl;
 		Greedy greedy;
-		greedy.run(testRandomList, true);
+		greedy.run(dataList, true, data);
 
 		std::cout << "\nFitness of greedy algorithm (lower is better) = " << greedy.getFitness() << endl;
 		check();
@@ -313,7 +161,9 @@ int main(int argc, char *argv[])
 
 
 	//check();
+	
 
+	getchar();
     return 0;
 }
 
@@ -324,49 +174,10 @@ int main(int argc, char *argv[])
 */
 void  check()
 {
-	char chk; int j;
 	std::cout << "\n\nPress any key to exit...";
-	chk = _getch();
-	j = chk;
-	for (int i = 1; i <= 256; i++)
+	const char chk = _getch();
+	int j = chk;
+	for (auto i = 1; i <= 256; i++)
 		if (i == j) break;
 	
-}
-
-/**
-*	@brief Displays the help menu to the console
-*	
-*	@return void
-*/
-void helpMenu() {
-
-	std::cout << "\n\nNumberPartitionGA.exe -greedy -rand  <RandomListSize <INT> > <RandomListStart <INT> > <RandomListEnd <INT> >" << endl << endl;
-	
-	std::cout << "-greedy                     Use the greedy algorithm" << endl;
-	std::cout << "-rand                       Use a randomly generated list" << endl;
-	std::cout << "<randomListSize> <INT>      How many elements are in the list" << endl;
-	std::cout << "<RandomListStart> <INT>     The starting range of random numbers in the original set" << endl;
-	std::cout << "<RandomListEnd> <INT>       The ending range of ranom numbers in the original set. Must be greated than <RandomListStart> <INT>" << endl << endl;
-
-
-	std::cout << "\n\nNumberPartitionGA.exe   -ga -rand  <RandomListSize <INT> > <PopulationSize <INT> > <Generations <INT> > <RandomListStart <INT> > <RandomListEnd <INT> >" << endl << endl;
-	std::cout << "-ga                         Use genetic algorithm" << endl;
-	std::cout << "-rand                       Use a randomly generated list" << endl;
-	std::cout << "<randomListSize> <INT>      How many elements are in the list" << endl;
-	std::cout << "<PopulationSize> <INT>      How many chromosomes are in the population" << endl << endl;
-	std::cout << "<Generations> <INT>         How many generations (itterations) do you want to go through " << endl;
-	std::cout << "<RandomListStart> <INT>     The starting range of random numbers in the original set" << endl;
-	std::cout << "<RandomListEnd> <INT>       The ending range of ranom numbers in the original set. Must be greated than <RandomListStart> <INT>" << endl << endl;
-	
-	std::cout << "\n\nNumberPartitionGA.exe   -greedy -ga -rand  <RandomListSize <INT> > <PopulationSize <INT> > <Generations <INT> > <RandomListStart <INT> > <RandomListEnd <INT> >" << endl << endl;
-	std::cout << "-greedy                     Use the greedy algorithm" << endl;
-	std::cout << "-ga                         Use genetic algorithm" << endl;
-	std::cout << "-rand                       Use a randomly generated list" << endl;
-	std::cout << "<randomListSize> <INT>      How many elements are in the list" << endl;
-	std::cout << "<PopulationSize> <INT>      How many chromosomes are in the population" << endl << endl;
-	std::cout << "<Generations> <INT>         How many generations (itterations) do you want to go through " << endl;
-	std::cout << "<RandomListStart> <INT>     The starting range of random numbers in the original set" << endl;
-	std::cout << "<RandomListEnd> <INT>       The ending range of ranom numbers in the original set. Must be greated than <RandomListStart> <INT>" << endl << endl;
-
-
 }

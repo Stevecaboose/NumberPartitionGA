@@ -4,12 +4,12 @@ class GA
 {
 public:
 	GA();
-	GA(std::vector<int> startingList, int INIT_POP_SIZE);
+	GA(std::vector<int> startingList, int popsize);
 	~GA();
 
 	void run(int itterations); //no input data. Data is randomly generated
 	std::vector<std::string> tournament(std::vector<std::vector<std::string>>& L, int& popSize);
-	void displayPopulation(const std::vector<std::vector<std::string>> vector_const);
+	void displayPopulation(const std::vector<std::vector<std::string>>& vector_const);
 	int getFitness(std::vector<std::string> chromosome);
 	std::vector<int> getSortedList();
 	void setBestSolution(std::vector<std::vector<std::string>>& L);
@@ -37,8 +37,6 @@ private:
 	int firstCross; 
 	int secondCross;
 	int bestSolutionIndex;
-	
-
 
 };
 

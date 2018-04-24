@@ -2,6 +2,7 @@
 #include <list>
 #include <string>
 #include <vector>
+#include "InputData.h"
 
 class Greedy
 {
@@ -9,12 +10,9 @@ public:
 	Greedy();
 	~Greedy();
 
+	void run(std::vector<int>& L, bool displayTwoLists, InputData in);
 
-
-
-	void run(std::vector<int>& L, bool displayTwoLists);
-
-	int getFitness() { return fitness; };
+	int getFitness() const { return fitness; };
 
 private:
 	int fitness;

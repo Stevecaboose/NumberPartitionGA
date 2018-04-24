@@ -1,0 +1,3 @@
+﻿  GA.cpp
+c:\users\steve\desktop\numberpartitionga-master\numberpartitionga\ga.cpp(43): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  NumberPartitionGA.vcxproj -> C:\Users\Steve\Desktop\NumberPartitionGA-master\x64\Debug\NumberPartitionGA.exe

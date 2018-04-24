@@ -1,4 +1,12 @@
-#include "stdafx.h"
+/**
+*	@file Greedy.cpp
+*	@author Steven Scholz
+*	@date 4/23/18
+*	@version 1.0
+*	
+*	@breif This file performs the greedy algorithm for the parition problem
+*/
+
 #include "Greedy.h"
 #include <list>
 #include <iostream>
@@ -6,6 +14,7 @@
 #include <functional>
 #include <vector>
 #include <algorithm>
+#include "InputData.h"
 
 using namespace std;
 
@@ -16,14 +25,14 @@ Greedy::Greedy()
 {
 	binarySolution = "";
 	fitness = -1;
+	listSize = 0;
 }
 
 /**
 *	@brief Default deconstructor for Greedy
 */
 Greedy::~Greedy()
-{
-}
+= default;
 
 /**
 *	@brief Starts the main algorithm for the greedy algorithm
@@ -32,14 +41,13 @@ Greedy::~Greedy()
 *	@param displayTwoLists <bool> Displays extra information about the final results
 *	@return void
 */
-void Greedy::run(std::vector<int>& L, bool displayTwoLists) {
+void Greedy::run(std::vector<int>& L, bool displayTwoLists, InputData in) {
 
 	listSize = L.size();
 	cout << endl << "Size of list to start: " << listSize << endl;
 	
 	cout << "\n\nOriginal List:\n\n";
-	for (auto i = L.begin(); i != L.end(); ++i)
-		std::cout << *i << ' ';
+	in.displayList();
 
 	std::sort(L.begin(), L.end());
 
@@ -94,14 +102,14 @@ void Greedy::run(std::vector<int>& L, bool displayTwoLists) {
 
 	if (displayTwoLists) {
 		cout << "Left list:\n";
-		for (int i : left) {
+		for (auto i : left) {
 			cout << i << endl;
 		}
 
 		cout << endl;
 		cout << "Right list:\n";
 
-		for (int i : right) {
+		for (auto i : right) {
 			cout << i << endl;
 		}
 	}

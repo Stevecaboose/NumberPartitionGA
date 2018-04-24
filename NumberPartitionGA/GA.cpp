@@ -1,4 +1,11 @@
-#include "stdafx.h"
+/**
+*	@file GA.cpp
+*	@author Steven Scholz
+*	@date 4/23/18
+*	@version 1.0
+*
+*	@breif This file performs the genetic algorithm for the parition problem
+*/
 #include "GA.h"
 #include <list>
 #include <time.h>
@@ -27,7 +34,7 @@ GA::GA()
 *	@param startingList A vector which contains the origonal number set
 *	@param popsize <INT> How many chromosomes are generated and kept in the population
 */
-GA::GA(std::vector<int> startingList, int popsize) {
+GA::GA(std::vector<int> startingList, const int popsize) {
 
 	srand(static_cast<unsigned int>(time(NULL)));
 	popSize = 0;
@@ -41,8 +48,7 @@ GA::GA(std::vector<int> startingList, int popsize) {
 *	@brief Default deconstructor for GA class
 */
 GA::~GA()
-{
-}
+= default;
 
 /**
 *	@brief run executes the genetic algorithm.
@@ -86,7 +92,7 @@ void GA::run(int itterations) {
 
 
 
-	for (int x = 0; x < itterations; x++) {
+	for (auto x = 0; x < itterations; x++) {
 
 
 
@@ -116,18 +122,18 @@ void GA::run(int itterations) {
 
 
 		firstCross = rand() % solution_size; // position from 0 to X1
-		secondCross = rand() % (solution_size + 1 - firstCross) + firstCross; //position fro
+		secondCross = rand() % (solution_size + 1 - firstCross) + firstCross; //position from X1 to X2
 
 		//taking the bits from the first parent up to the first cross
-		for (int i = 0; i < firstCross; i++) {
+		for (auto i = 0; i < firstCross; i++) {
 			offspring.push_back(firstParent[i]);
 		}
 		//taking the bits from the second parent up to the second cross
-		for (int i = firstCross; i < secondCross; i++) {
+		for (auto i = firstCross; i < secondCross; i++) {
 			offspring.push_back(secondParent[i]);
 		}
 		//taking the bits from the first parent up to the end
-		for (int i = secondCross; i < solution_size; i++) {
+		for (auto i = secondCross; i < solution_size; i++) {
 			offspring.push_back(firstParent[i]);
 		}
 
@@ -142,8 +148,8 @@ void GA::run(int itterations) {
 		//Now the offspring needs to be mutated
 		// There is a 10% chance that the bit will be switched
 
-		for (int i = 0; i < solution_size; i++) {
-			if (rand() % 100 < 10) {
+		for (auto i = 0; i < solution_size; i++) {
+			if (rand() % 100 < 5) {
 				if (offspring[i] == "0") {
 					offspring[i] = "1";
 				}
@@ -191,12 +197,11 @@ std::vector<std::string> GA::tournament(std::vector<std::vector<std::string>>& L
 	std::cout << "Randomly selecting first contender...\n\n";
 	
 	int firstIndex = rand() % popSize;
-	
 
-	std::vector<string> temp;
+
 	std::vector<std::vector<std::string>> tournamentVector;
 	
-	temp = L[firstIndex]; //store vector in temp
+	std::vector<string> temp = L[firstIndex]; //store vector in temp
 	//erase chosen vector
 	L.erase(L.begin() + firstIndex);
 	//store the chromosome in the tournament vector 
@@ -219,8 +224,8 @@ std::vector<std::string> GA::tournament(std::vector<std::vector<std::string>>& L
 	//now our tournament vector has 2 potention parents
 	//we need to compare their fitnesses and pick the better of the two
 
-	int fitness1 = getFitness(tournamentVector[0]);
-	int fitness2 = getFitness(tournamentVector[1]);
+	const int fitness1 = getFitness(tournamentVector[0]);
+	const int fitness2 = getFitness(tournamentVector[1]);
 
 	if (fitness1 <= fitness2) { //fitness needs to be lower for a winner
 		//put the winner back into the population
@@ -242,7 +247,7 @@ std::vector<std::string> GA::tournament(std::vector<std::vector<std::string>>& L
 *	@param vector_const The vector containing the population of chromosomes. This is constant because we are only viewing data.
 *	@return void
 */
-void GA::displayPopulation(const std::vector<std::vector<std::string>> vector_const) {
+void GA::displayPopulation(const std::vector<std::vector<std::string>>& vector_const) {
 
 	for (int i = 0; i < vector_const.size(); i++) {
 		std::cout << "\nChromosome " << i+1 << " : ";
@@ -259,10 +264,10 @@ void GA::displayPopulation(const std::vector<std::vector<std::string>> vector_co
 int GA::getFitness(std::vector<std::string> chromosome) {
 
 	std::vector<int> left, right;
-	int leftSum = 0;
-	int rightSum = 0;
+	auto leftSum = 0;
+	auto rightSum = 0;
 
-	for (int i = 0; i < chromosome.size(); i++) {
+	for (auto i = 0; i < chromosome.size(); i++) {
 		if (chromosome[i] == "1") {
 			leftSum += sortedList[i];
 		}
@@ -279,8 +284,9 @@ std::vector<int> GA::getSortedList() {
 
 	cout << "\n\nSorted List:\n\n";
 
-	for (int i = 0; i < sortedList.size(); i++) {
-		std::cout << sortedList[i] << ' ';
+	for (auto i : sortedList)
+	{
+		std::cout << i << ' ';
 	}
 
 	cout << endl << endl << endl;
@@ -302,14 +308,14 @@ void GA::setBestSolution(std::vector<std::vector<std::string>>& L){
 	std::vector<int> valuesArray(popSize);
 
 	//populate array with fitnesses
-	for (int i = 0; i < popSize; i++) {
+	for (auto i = 0; i < popSize; i++) {
 		valuesArray[i] = getFitness(L[i]);
 	}
 
-	int smallestFitness = valuesArray[0];
-	int smallestFitnessIndex = 0;
+	auto smallestFitness = valuesArray[0];
+	auto smallestFitnessIndex = 0;
 
-	for (int i = 1; i < sizeof(valuesArray)/sizeof(valuesArray[0]); ++i) {
+	for (auto i = 1; i < valuesArray.size(); ++i) {
 		if (valuesArray[i] < smallestFitness) {
 			smallestFitness = valuesArray[i];
 			smallestFitnessIndex = i;
@@ -321,7 +327,7 @@ void GA::setBestSolution(std::vector<std::vector<std::string>>& L){
 
 
 
-	for (int i = 0; i < solution_size; i++) {
+	for (auto i = 0; i < solution_size; i++) {
 		
 		if (L[smallestFitnessIndex][i] == "1") { //element belongs in left partition
 			finalSolution.leftPartition.push_back(sortedList[i]);
