@@ -1,4 +1,0 @@
-var dir_e741787638ae279f53340e507c6c4ee2 =
-[
-    [ "CSCI443", "dir_9239096e754c1893d9a3d6176f1c7efa.html", "dir_9239096e754c1893d9a3d6176f1c7efa" ]
-];
