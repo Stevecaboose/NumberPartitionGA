@@ -16,7 +16,6 @@
 #include <algorithm>
 #include "InputData.h"
 
-using namespace std;
 
 /**
 *	@breif Default constructor for Greedy.
@@ -44,21 +43,21 @@ Greedy::~Greedy()
 void Greedy::run(std::vector<int>& L, bool displayTwoLists, InputData in) {
 
 	listSize = L.size();
-	cout << endl << "Size of list to start: " << listSize << endl;
+	std::cout << std::endl << "Size of list to start: " << listSize << std::endl;
 	
-	cout << "\n\nOriginal List:\n\n";
+	std::cout << "\n\nOriginal List:\n\n";
 	in.displayList();
 
 	std::sort(L.begin(), L.end());
 
-	cout << "\n\nSorted List:\n\n";
+	std::cout << "\n\nSorted List:\n\n";
 
 	for (auto i = L.begin(); i != L.end(); ++i)
 		std::cout << *i << ' ';
 	
-	cout << endl << endl << endl;
+	std::cout << std::endl << std::endl << std::endl;
 
-	vector<int> left, right;
+	std::vector<int> left, right;
 	//take largest value and put it in the left list
 	int temp = L.back(); //grab last value
 	L.pop_back(); //remove last value
@@ -81,7 +80,7 @@ void Greedy::run(std::vector<int>& L, bool displayTwoLists, InputData in) {
 			rightSum += temp;
 
 			binarySolution += '0';
-			cout << "\nPercent done: " << (i*1.0 / listSize) * 100 << "%";
+			std::cout << "\nPercent done: " << (i*1.0 / listSize) * 100 << "%";
 
 		}
 		else { //need to put it in the left list
@@ -91,33 +90,33 @@ void Greedy::run(std::vector<int>& L, bool displayTwoLists, InputData in) {
 			leftSum += temp;
 
 			binarySolution += '1';
-			cout << "\nPercent done: " << (i*1.0 / listSize) * 100 << "%";
+			std::cout << "\nPercent done: " << (i*1.0 / listSize) * 100 << "%";
 		}
 
 	} //end for
 
 	std::reverse(std::begin(binarySolution), std::end(binarySolution));
 
-	cout << endl << "Size of list after (expected 0): " << L.size() << endl;
+	std::cout << std::endl << "Size of list after (expected 0): " << L.size() << std::endl;
 
 	if (displayTwoLists) {
-		cout << "Left list:\n";
+		std::cout << "Left list:\n";
 		for (auto i : left) {
-			cout << i << endl;
+			std::cout << i << std::endl;
 		}
 
-		cout << endl;
-		cout << "Right list:\n";
+		std::cout << std::endl;
+		std::cout << "Right list:\n";
 
 		for (auto i : right) {
-			cout << i << endl;
+			std::cout << i << std::endl;
 		}
 	}
 
-	cout << "\nLeft sum = " << leftSum << endl;
-	cout << "Right sum = " << rightSum << endl;
+	std::cout << "\nLeft sum = " << leftSum << std::endl;
+	std::cout << "Right sum = " << rightSum << std::endl;
 
-	cout << endl << endl << "Binary Solution: " << binarySolution << endl;
+	std::cout << std::endl << std::endl << "Binary Solution: " << binarySolution << std::endl;
 	fitness = abs(leftSum - rightSum);
 
 } // end run

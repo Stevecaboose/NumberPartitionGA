@@ -58,9 +58,8 @@ const std::string INPUTFILE = "InputData.csv";
 
 
 void check();
+void intToASCII(const int n);
 
-
-using namespace std;
 
 
 int main(int argc, char *argv[])
@@ -68,13 +67,12 @@ int main(int argc, char *argv[])
 	srand(static_cast<unsigned int>(time(NULL)));
 
 
-	vector<int> testList = {4, 5, 6, 7, 8};
-	vector<int> dataList;
+	std::vector<int> testList = {4, 5, 6, 7, 8};
 
 
 	bool useRandomList = false;
 	bool useGAAlgorithm = true;
-	bool useGreedyAlgorithm = true;
+	bool useGreedyAlgorithm = false;
 	int popsize;
 	int itterations;
 	int randomListSize;
@@ -87,19 +85,15 @@ int main(int argc, char *argv[])
 
 	InputData data(INPUTFILE);
 
-	dataList = data.getdataSet();
+	std::vector<int> dataList = data.getdataSet();
 
 
 	if (useGAAlgorithm) {
-
-		
-		
-
-		cout << "How many itterations would you like to use?";
-		cin >> itterations;
+		std::cout << "How many itterations would you like to use?";
+		std::cin >> itterations;
 
 		popsize = dataList.size();
-		std::cout << "Using genetic algorithm with a population of: " << popsize << " and the number of generations: " << itterations << endl;
+		std::cout << "Using genetic algorithm with a population of: " << popsize << " and the number of generations: " << itterations << std::endl;
 		GA ga(dataList, popsize);
 		ga.run(itterations);
 
@@ -130,6 +124,7 @@ int main(int argc, char *argv[])
 		std::cout << "\n\nLeft Partition: { ";
 		for (int i = 0; i < ga.finalSolution.leftPartition.size(); i++) {
 			std::cout << ga.finalSolution.leftPartition[i] << " ";
+			intToASCII(ga.finalSolution.leftPartition[i]);
 		}
 
 		std::cout << "}\n\n";
@@ -137,6 +132,7 @@ int main(int argc, char *argv[])
 		std::cout << "\nRight Partition: { ";
 		for (int i = 0; i < ga.finalSolution.rightPartition.size(); i++) {
 			std::cout << ga.finalSolution.rightPartition[i] << " ";
+			intToASCII(ga.finalSolution.rightPartition[i]);
 		}
 
 		std::cout << "}\n\n";
@@ -150,17 +146,17 @@ int main(int argc, char *argv[])
 	
 
 	if (useGreedyAlgorithm) {
-		std::cout << "Using greedy algorithm..." << endl;
+		std::cout << "Using greedy algorithm..." << std::endl;
 		Greedy greedy;
 		greedy.run(dataList, true, data);
 
-		std::cout << "\nFitness of greedy algorithm (lower is better) = " << greedy.getFitness() << endl;
+		std::cout << "\nFitness of greedy algorithm (lower is better) = " << greedy.getFitness() << std::endl;
 		check();
 
 	}
 
 
-	//check();
+	check();
 	
 
 	getchar();
@@ -181,3 +177,9 @@ void  check()
 		if (i == j) break;
 	
 }
+
+void intToASCII(const int n)
+{
+	char buffer = n;
+	std::cout << buffer << " ";
+} 

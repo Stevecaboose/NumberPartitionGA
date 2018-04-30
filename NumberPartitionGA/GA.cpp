@@ -8,7 +8,7 @@
 */
 #include "GA.h"
 #include <list>
-#include <time.h>
+#include <ctime>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -16,14 +16,12 @@
 #include <algorithm>
 #include <random>
 
-using namespace std;
-
 /**
 *	@brief Default constructor for genetic algorithm. This should not be used by default
 */
 GA::GA()
 {
-	srand(static_cast<unsigned int>(time(NULL)));
+	srand(static_cast<unsigned int>(time(nullptr)));
 	popSize = 0;
 }
 
@@ -36,7 +34,7 @@ GA::GA()
 */
 GA::GA(std::vector<int> startingList, const int popsize) {
 
-	srand(static_cast<unsigned int>(time(NULL)));
+	srand(static_cast<unsigned int>(time(nullptr)));
 	popSize = 0;
 	std::sort(startingList.begin(), startingList.end());
 	sortedList = startingList;
@@ -201,7 +199,7 @@ std::vector<std::string> GA::tournament(std::vector<std::vector<std::string>>& L
 
 	std::vector<std::vector<std::string>> tournamentVector;
 	
-	std::vector<string> temp = L[firstIndex]; //store vector in temp
+	std::vector<std::string> temp = L[firstIndex]; //store vector in temp
 	//erase chosen vector
 	L.erase(L.begin() + firstIndex);
 	//store the chromosome in the tournament vector 
@@ -282,14 +280,14 @@ int GA::getFitness(std::vector<std::string> chromosome) {
 
 std::vector<int> GA::getSortedList() {
 
-	cout << "\n\nSorted List:\n\n";
+	std::cout << "\n\nSorted List:\n\n";
 
 	for (auto i : sortedList)
 	{
 		std::cout << i << ' ';
 	}
 
-	cout << endl << endl << endl;
+	std::cout << std::endl << std::endl << std::endl;
 
 	return sortedList;
 }
